@@ -26,24 +26,19 @@ class MongoDBClient:
         
         if not self.uri:
             raise ValueError("[MONGO_ERR] MONGO_DB_URI not set in environment")
-        
-        try:
-            self.client = MongoClient(
-                self.uri,
-                maxPoolSize=10,
-                minPoolSize=2,
-                serverSelectionTimeoutMS=5000,
-                # tls=True,
-                # tlsCAFile=certifi.where(),
+    
+        self.client = MongoClient(
+            self.uri,
+            maxPoolSize=10,
+            minPoolSize=2,
+            serverSelectionTimeoutMS=10000,
+            tls=True,
+            tlsCAFile=certifi.where(),
             )
             # Test connection
-            self.client.admin.command('ping')
-            self.db = self.client[self.db_name]
-            self.collection = self.db[self.collection_name]
-            logger.info(f"[MONGO_OK] Connected to {self.db_name}.{self.collection_name}")
-        except ConnectionFailure as e:
-            logger.error(f"[MONGO_ERR] Connection failed: {e}")
-            raise
+        self.db = self.client[self.db_name]
+        self.collection = self.db[self.collection_name]
+        logger.info(f"[MONGO_OK] Connected to {self.db_name}.{self.collection_name}")
     
     def vector_search(
         self,
