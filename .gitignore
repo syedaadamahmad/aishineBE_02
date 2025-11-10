@@ -1,0 +1,9 @@
+.env
+/Setup
+docx_parser.py
+Enhanced_Module1_KB.json
+MODULE-1 KB.docx
+module1.json
+Parsed_Module1_KB.json
+test_backend.py
+/Documentation
