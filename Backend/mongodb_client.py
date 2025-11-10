@@ -21,7 +21,7 @@ class MongoDBClient:
     
     def __init__(self):
         self.uri = os.getenv("MONGO_DB_URI")
-        self.db_name = os.getenv("DB_NAME", "first_collection")
+        self.db_name = os.getenv("DB_NAME", "aishine")
         self.collection_name = "module_vectors"
         
         if not self.uri:
